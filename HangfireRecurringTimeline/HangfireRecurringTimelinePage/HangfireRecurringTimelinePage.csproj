@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>11</LangVersion>
+        <WarningsAsErrors>true</WarningsAsErrors>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CronExpressionDescriptor" Version="2.19.0" />
+        <PackageReference Include="Cronos" Version="0.7.1" />
+        <PackageReference Include="Hangfire.AspNetCore" Version="1.7.32" />
+        <PackageReference Include="Hangfire.Core" Version="1.7.32" />
+    </ItemGroup>
+
+</Project>
