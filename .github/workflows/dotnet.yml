@@ -24,8 +24,8 @@ jobs:
       run: dotnet restore
       working-directory: ./HangfireRecurringTimeline
     - name: Build
-      run: dotnet build HangfireRecurringTimeline --no-restore
+      run: dotnet build --no-restore
       working-directory: ./HangfireRecurringTimeline
     - name: Test
-      run: dotnet test HangfireRecurringTimeline --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal
       working-directory: ./HangfireRecurringTimeline
