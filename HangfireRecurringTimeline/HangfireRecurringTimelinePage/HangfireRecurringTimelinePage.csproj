@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
         <WarningsAsErrors>true</WarningsAsErrors>
+        <PackageId>Hangfire.Dashboard.RecurringTimeline</PackageId>
     </PropertyGroup>
 
     <ItemGroup>
