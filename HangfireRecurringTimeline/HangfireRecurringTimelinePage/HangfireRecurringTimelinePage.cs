@@ -19,6 +19,8 @@ public class HangfireRecurringTimelinePage : LayoutPage
 
     public override void Execute()
     {
+        base.Execute();
+
         var initialDay = DateTime.Today;
 
         var recurringJobs = base.Storage.GetConnection().GetRecurringJobs();
@@ -53,8 +55,6 @@ public class HangfireRecurringTimelinePage : LayoutPage
         var content = new NonEscapedString(html);
 
         Write(content);
-
-        base.Execute();
     }
 
     private static List<Continuation> DeserializeContinuations(string serialized)
