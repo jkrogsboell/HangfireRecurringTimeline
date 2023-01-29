@@ -1,0 +1,27 @@
+name: Upload dotnet package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+        source-url: https://nuget.pkg.github.com/<owner>/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_TOKEN}}
+    - name: Build
+      run: dotnet build HangfireRecurringTimeline --configuration Release HangfireRecurringTimelinePage
+    - name: Test
+      run: dotnet test HangfireRecurringTimeline --no-build --verbosity normal  
+    - name: Create the package
+      run: dotnet pack HangfireRecurringTimeline --configuration Release HangfireRecurringTimelinePage      
