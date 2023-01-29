@@ -1,4 +1,6 @@
-﻿namespace HangfireRecurringTimelinePage;
+﻿using System.Globalization;
+
+namespace HangfireRecurringTimelinePage;
 
 using Cronos;
 using Hangfire;
@@ -41,8 +43,8 @@ public class HangfireRecurringTimelinePage : LayoutPage
                 .Select(rjd => new
                 {
                     title = rjd.RecurringJobId,
-                    start = rjd.StartTime.ToString("yyyy-MM-ddTHH:mm:ss"),
-                    end = rjd.StartTime.AddMilliseconds(rjd.LastDuration ?? 60000).ToString("yyyy-MM-ddTHH:mm:ss"),
+                    start = rjd.StartTime.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture),
+                    end = rjd.StartTime.AddMilliseconds(rjd.LastDuration ?? 60000).ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture),
                     description = HangfireRecurringTimelineHtmlGenerator.GetPopupDescription(rjd),
                     textColor = ColorJobHelpers.GetTextColorString(rjd.RecurringJobId),
                     backgroundColor = ColorJobHelpers.GetBackgroundColorString(rjd.RecurringJobId)
