@@ -21,8 +21,8 @@ jobs:
         run: dotnet build --configuration Release HangfireRecurringTimelinePage
         working-directory: ./HangfireRecurringTimeline
       - name: Create NuGet package
-        run: dotnet pack -c Release HangfireRecurringTimelinePage /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/jkrogbsoell/HangfireRecurringTimeline/releases/tag/${{ github.event.release.tag_name }}"
+        run: dotnet pack -c Release HangfireRecurringTimelinePage /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/jkrogbsoell/HangfireRecurringTimeline/releases/tag/${{ github.event.release.tag_name }}" /p:RepositoryUrl="https://github.com/jkrogbsoell/HangfireRecurringTimeline"
         working-directory: ./HangfireRecurringTimeline
       - name: Publish the package to Nuget
-        run: dotnet nuget push HangfireRecurringTimelinePage/bin/Release/Hangfire.Dashboard.RecurringTimeline.${{ github.event.release.tag_name }}.nupkg --api-key ${{secrets.NUGET_TOKEN}} --source https://api.nuget.org/v3/index.json
+        run: dotnet nuget push HangfireRecurringTimelinePage/bin/Release/RecurringTimeline.Hangfire.Dashboard.${{ github.event.release.tag_name }}.nupkg --api-key ${{secrets.NUGET_TOKEN}} --source https://api.nuget.org/v3/index.json
         working-directory: ./HangfireRecurringTimeline

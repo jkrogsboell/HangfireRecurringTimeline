@@ -6,7 +6,9 @@
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
         <WarningsAsErrors>true</WarningsAsErrors>
-        <PackageId>Hangfire.Dashboard.RecurringTimeline</PackageId>
+        <PackageId>RecurringTimeline.Hangfire.Dashboard</PackageId>
+        <PackageLicenseFile>FILES\LICENSE</PackageLicenseFile>
+        <PackageReadmeFile>FILES\README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,6 +16,11 @@
         <PackageReference Include="Cronos" Version="0.7.1" />
         <PackageReference Include="Hangfire.AspNetCore" Version="1.7.32" />
         <PackageReference Include="Hangfire.Core" Version="1.7.32" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <None Include="../../LICENSE" Pack="true" PackagePath="FILES" />
+        <None Include="../../README.md" Pack="true" PackagePath="FILES" />
     </ItemGroup>
 
 </Project>
