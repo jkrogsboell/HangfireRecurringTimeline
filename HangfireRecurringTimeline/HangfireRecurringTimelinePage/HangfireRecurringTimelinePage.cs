@@ -15,15 +15,23 @@ public class HangfireRecurringTimelinePage : LayoutPage
 {
     private const int MaxDepth = 100;
 
-    public HangfireRecurringTimelinePage() : base("Recurring Timeline")
+    private readonly RecurringTimelineApplicationBuilderExtensions.ViewType _viewType;
+
+    public HangfireRecurringTimelinePage(RecurringTimelineApplicationBuilderExtensions.ViewType viewType) : base("Recurring Timeline")
     {
+        _viewType = viewType;
     }
 
     public override void Execute()
     {
         base.Execute();
+        
+        var dateQuery = Context.Request.GetQuery("date");
 
-        var initialDay = DateTime.Today;
+        if (!DateTime.TryParse(dateQuery, out var initialDay))
+        {
+            initialDay = DateTime.Today;
+        } 
 
         var recurringJobs = base.Storage.GetConnection().GetRecurringJobs();
 
@@ -52,7 +60,7 @@ public class HangfireRecurringTimelinePage : LayoutPage
                 .Select(x => JsonConvert.SerializeObject(x, Formatting.Indented))
                 .ToList();
 
-        var html = HangfireRecurringTimelineHtmlGenerator.GeneratePageHtml(initialDay, events);
+        var html = HangfireRecurringTimelineHtmlGenerator.GeneratePageHtml(initialDay, events, _viewType);
 
         var content = new NonEscapedString(html);
 

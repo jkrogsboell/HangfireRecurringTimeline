@@ -2,7 +2,10 @@
 
 internal static class HangfireRecurringTimelineHtmlGenerator
 {
-    internal static string GeneratePageHtml(DateTime initialDay, List<string> events)
+    internal static string GeneratePageHtml(
+        DateTime initialDay, 
+        List<string> events,
+        RecurringTimelineApplicationBuilderExtensions.ViewType viewType)
     {
         var html = /*language=HTML*/$$"""
 <style>
@@ -67,7 +70,7 @@ internal static class HangfireRecurringTimelineHtmlGenerator
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             locale: '{{Thread.CurrentThread.CurrentUICulture.Name}}',
-            initialView: 'timeGridWeek',
+            initialView: '{{(viewType == RecurringTimelineApplicationBuilderExtensions.ViewType.Week ? "timeGridWeek" : "timeGridDay")}}',
             expandRows: true,
             firstDay: 1,
             initialDate: new Date("{{initialDay:yyyy-MM-dd}}"),
@@ -91,6 +94,9 @@ internal static class HangfireRecurringTimelineHtmlGenerator
             },
             views: {
                 timeGridWeek: {
+                    slotDuration: '00:10:00'
+                },
+                timeGridDay: {
                     slotDuration: '00:10:00'
                 }
             }
