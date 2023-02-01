@@ -29,10 +29,9 @@ app
         AddMenuItem = true,
         RelativePath = "/timeline_week"
     });
-    ;
 
-RecurringJob.AddOrUpdate<TestJobs>("Id_of_Recurring", (job) => job.TestJobRecurring(), "0/5 13,18 * * *");
-RecurringJob.AddOrUpdate<TestJobs>("Id_of_RecCont", (job) => job.TestJobRecurringWithContinuation(null!), "23 0-18 * * *");
+RecurringJob.AddOrUpdate<TestJobs>("Id_of_Recurring", (job) => job.TestJobRecurring(), "0/5 13,18 * * *", TimeZoneInfo.Utc);
+RecurringJob.AddOrUpdate<TestJobs>("Id_of_RecCont", (job) => job.TestJobRecurringWithContinuation(null!), "23 0-18 * * *", TimeZoneInfo.Local);
 
 RecurringJob.TriggerJob("Id_of_Recurring");
 RecurringJob.TriggerJob("Id_of_RecCont");

@@ -98,7 +98,7 @@ public class HangfireRecurringTimelinePage : LayoutPage
         if (jobDetails == null)
             return;
 
-        firstCreatedAt ??= jobDetails.CreatedAt;
+        firstCreatedAt ??= jobDetails.CreatedAt?.ToUniversalTime();
 
         var history = jobDetails.History;
 
@@ -129,9 +129,9 @@ public class HangfireRecurringTimelinePage : LayoutPage
     {
         var cronExpression = CronExpression.Parse(recurringJobDto.Cron);
 
-        var occurrences = cronExpression.GetOccurrences(start, end, TimeZoneInfo.Local);
+        var occurrences = cronExpression.GetOccurrences(start, end, TimeZoneInfo.FindSystemTimeZoneById(recurringJobDto.TimeZoneId));
 
-        var description = CronExpressionDescriptor.ExpressionDescriptor.GetDescription(recurringJobDto.Cron);
+        var description = CronExpressionDescriptor.ExpressionDescriptor.GetDescription(recurringJobDto.Cron) + " " + recurringJobDto.TimeZoneId;
 
         int? lastDurationInMillis = null;
         var continuationCount = 0;
