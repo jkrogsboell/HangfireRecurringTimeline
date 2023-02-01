@@ -52,7 +52,7 @@ public class HangfireRecurringTimelinePage : LayoutPage
                 {
                     title = rjd.RecurringJobId,
                     start = rjd.StartTime.ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture),
-                    end = rjd.StartTime.AddMilliseconds(rjd.LastDuration ?? 60000).ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture),
+                    end = rjd.StartTime.AddMilliseconds(Math.Max(rjd.LastDuration ?? 60000, 1000)).ToString("yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture),
                     description = HangfireRecurringTimelineHtmlGenerator.GetPopupDescription(rjd),
                     textColor = ColorJobHelpers.GetTextColorString(rjd.RecurringJobId),
                     backgroundColor = ColorJobHelpers.GetBackgroundColorString(rjd.RecurringJobId)
