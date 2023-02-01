@@ -86,7 +86,7 @@ public class HangfireRecurringTimelinePage : LayoutPage
         public JobContinuationOptions Options { get; set; }
     }
 
-    private void CalcMaxSucceededAt(ref DateTimeOffset? firstCreatedAt, ref DateTimeOffset? currentMax,
+    private void CalcMaxSucceededAt(ref DateTime? firstCreatedAt, ref DateTime? currentMax,
         ref int continuationCount,
         string continuationJobId, int depth)
     {
@@ -108,7 +108,7 @@ public class HangfireRecurringTimelinePage : LayoutPage
         if (succeededAt == null)
             return;
 
-        var succeedAtDt = (DateTimeOffset?)DateTimeOffset.Parse(succeededAt);
+        var succeedAtDt = DateTimeOffset.Parse(succeededAt).DateTime;
 
         if (succeedAtDt > currentMax || currentMax == null)
             currentMax = succeedAtDt;
@@ -135,8 +135,8 @@ public class HangfireRecurringTimelinePage : LayoutPage
 
         int? lastDurationInMillis = null;
         var continuationCount = 0;
-        DateTimeOffset? succeededMax = null;
-        DateTimeOffset? createdAt = null;
+        DateTime? succeededMax = null;
+        DateTime? createdAt = null;
         if (recurringJobDto.LastJobId != null)
             CalcMaxSucceededAt(ref createdAt, ref succeededMax, ref continuationCount, recurringJobDto.LastJobId, 0);
 
