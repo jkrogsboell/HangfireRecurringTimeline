@@ -98,7 +98,7 @@ public class HangfireRecurringTimelinePage : LayoutPage
         if (jobDetails == null)
             return;
 
-        firstCreatedAt ??= jobDetails.CreatedAt?.ToUniversalTime();
+        firstCreatedAt ??= jobDetails.CreatedAt;
 
         var history = jobDetails.History;
 
